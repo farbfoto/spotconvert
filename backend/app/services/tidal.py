@@ -1,3 +1,5 @@
+from typing import Optional
+
 import httpx
 
 _BASE = "https://api.tidal.com/v1"
@@ -16,7 +18,7 @@ async def get_user(access_token: str) -> dict:
 
 async def search_by_isrc(
     access_token: str, isrc: str, country_code: str = "US"
-) -> dict | None:
+) -> Optional[dict]:
     async with httpx.AsyncClient() as client:
         resp = await client.get(
             f"{_BASE}/tracks",

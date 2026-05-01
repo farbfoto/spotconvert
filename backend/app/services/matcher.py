@@ -1,3 +1,5 @@
+from typing import Optional
+
 from rapidfuzz import fuzz
 
 from .tidal import search_by_isrc, search_tracks
@@ -5,7 +7,7 @@ from .tidal import search_by_isrc, search_tracks
 _FUZZY_THRESHOLD = 80
 
 
-async def match_track(spotify_track: dict, tidal_token: str) -> dict | None:
+async def match_track(spotify_track: dict, tidal_token: str) -> Optional[dict]:
     isrc = spotify_track.get("external_ids", {}).get("isrc")
     if isrc:
         result = await search_by_isrc(tidal_token, isrc)
